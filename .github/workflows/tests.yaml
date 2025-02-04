@@ -13,20 +13,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3  # Utilisation de v3 (plus récent)
 
       - name: Set up Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
-          python-version: '3.8'  # Remplace si besoin
+          python-version: '3.8'  # Modifie si nécessaire
+          cache: 'poetry'
 
-      - name: Install Poetry
-        run: |
-          curl -sSL https://install.python-poetry.org | python3 -
-          echo "$HOME/.local/bin" >> $GITHUB_PATH
+      - name: Install Poetry (officiel)
+        uses: abatilo/actions-poetry@v2
 
       - name: Check Poetry installation
-        run: $HOME/.local/bin/poetry --version  # Vérification correcte
+        run: poetry --version  # Devrait fonctionner correctement
 
       - name: Install dependencies
-        run: $HOME/.local/bin/poetry install
+        run: poetry install
