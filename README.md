@@ -23,13 +23,23 @@ The project is structured to keep the code organized and modular:
 
 projet_final/ 
 ├── app.py # Main application script that runs the Streamlit app 
+
 ├── auth.py # User authentication logic (if applicable) 
+
 ├── api.py # API interactions for external data or services 
+
 ├── utils.py # Utility functions for data processing and analysis
+
 ├── tests/ # Unit tests and test cases to ensure code quality 
+
 ├── .github/ # GitHub Actions workflows for CI/CD integration 
+
 ├── .gitignore # Git ignore file to exclude unnecessary files from version control 
+
 ├── .pre-commit-config.yaml # Configuration for pre-commit hooks to enforce code quality
+
 ├── poetry.lock # Poetry lock file to manage dependencies 
+
 ├── pyproject.toml # Poetry configuration for the project 
+
 └── README.md # Project documentation (this file)
