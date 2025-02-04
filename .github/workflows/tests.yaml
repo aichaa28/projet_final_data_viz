@@ -14,18 +14,19 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      
+
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: '3.8'  # Replace with your Python version
-      - name: Check Poetry installation
-        run: poetry --version
+          python-version: '3.8'  # Remplace si besoin
+
       - name: Install Poetry
         run: |
           curl -sSL https://install.python-poetry.org | python3 -
-      - name: Add Poetry to PATH
-        run: echo "$HOME/.local/bin" >> $GITHUB_PATH
-          
+          echo "$HOME/.local/bin" >> $GITHUB_PATH
+
+      - name: Check Poetry installation
+        run: $HOME/.local/bin/poetry --version  # Vérification correcte
+
       - name: Install dependencies
-        run: poetry install
+        run: $HOME/.local/bin/poetry install
