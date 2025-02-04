@@ -2,7 +2,7 @@
 
 ## Overview
 
-This project utilizes **Streamlit** and **Pandas** to build an interactive web application that facilitates data exploration, analysis, and visualization. The app is designed to allow users to easily upload datasets, perform statistical analysis, and create visualizations, all in a user-friendly interface.
+This project utilizes **Streamlit** and **Pandas** to build an interactive web application that facilitates data exploration, analysis, and visualization. The app is designed to allow users to easily upload datasets, perform statistical analysis, create visualizations, and even ask questions about the data for immediate responses.
 
 By using this application, users can quickly gain insights from their data, making it an ideal tool for data analysis, data science projects, and exploratory data visualization.
 
@@ -12,10 +12,10 @@ By using this application, users can quickly gain insights from their data, maki
 - **Statistical Analysis**: View descriptive statistics such as mean, median, standard deviation, and detect missing values within datasets.
 - **Interactive Visualizations**: Generate a variety of visualizations including:
   - Histograms
-  - Boxplots
-  - Correlation heatmaps
+  - Boxplots ...
 - **Dynamic Column Selection**: Choose columns from the dataset (both numerical and categorical) for targeted analysis and visualization.
 - **Customizable Plots**: Modify the appearance and styling of generated plots, such as color palettes and labels.
+- **Question Answering**: Ask questions related to the dataset, and receive automatic answers powered by the Claude API. This allows users to easily query their data for insights, such as identifying trends, calculating specific metrics, or getting a deeper understanding of patterns within the dataset.
 
 ## Project Structure
 
