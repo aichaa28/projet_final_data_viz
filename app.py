@@ -12,16 +12,28 @@ load_dotenv()
 CLAUDE_API_URL = "https://api.anthropic.com/v1/complete"
 
 
-def ask_claude(question, dataset_summary):
+def ask_claude(question, df):
+    api_key = st.session_state.get('claude_api_key', '')
+
+    if not api_key:
+        st.error("API key not found. Please authenticate.")
+        return "No answer found"
+
     headers = {
-        "Authorization": f"Bearer {st.session_state.claude_api_key}",
+        "Authorization": f"Bearer {api_key}",
         "Content-Type": "application/json"
     }
-    prompt = """Here is a summary of
-    a dataset: {dataset_summary}. Answer the question: {question}"""
+    prompt = f"Here is the dataset: {df}. Answer the question: {question}"
     data = {"prompt": prompt, "max_tokens": 200}
-    response = requests.post(CLAUDE_API_URL, json=data, headers=headers)
-    return response.json().get("completion", "No answer found")
+
+    try:
+        response = requests.post(CLAUDE_API_URL, json=data, headers=headers)
+        response.raise_for_status()
+        return response.json().get("completion", "No answer found")
+    except requests.exceptions.RequestException as e:
+        st.error(f"Error during the request to the Claude API: {e}")
+        return "No answer found"
+
 
 
 def generate_visualizations(df, question): 
@@ -178,8 +190,12 @@ else:
             final_question = question if question else selected_question
             if final_question:
                 dataset_summary = str(df.describe())
-                answer = ask_claude(final_question, dataset_summary)
+                answer = ask_claude(final_question, df)
                 st.write("🧠 Claude's answer:", answer)
                 generate_visualizations(df, final_question)
             else:
                 st.warning("Please enter a question.")
+    if st.button("log off"):
+        st.session_state.pop("claude_api_key", None)
+        st.rerun()
+

@@ -1,16 +1,17 @@
 import streamlit as st
 
+
 def auth_page():
-    st.title("🔑 Authentification")
+    st.title("🔑 Authentication")
 
-    api_key = st.text_input("Entrez votre clé API Claude :", type="password")
+    api_key = st.text_input("Enter your Claude API key:", type="password")
 
-    if st.button("Valider"):
+    if st.button("Submit"):
         if api_key:
             # Stocker la clé API dans la session
-            st.session_state["claude_api_key"] = api_key
-            st.success("Clé API enregistrée avec succès !")
-            st.rerun()  # Recharger la page pour passer à l'application principale
+            st.session_state['claude_api_key'] = api_key
+            st.success("API key successfully saved!")
         else:
-            st.error("Veuillez entrer une clé API valide.")
+            st.error("Please enter a valid API key.")
+
 
