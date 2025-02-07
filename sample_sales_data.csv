@@ -1,0 +1,201 @@
+Date,Product,Region,Sales_Rep,Quantity,Unit_Price,Payment_Method,Customer_Rating,Total_Amount
+2023-01-01,Headphones,North,John Smith,6,599,Credit Card,4,3594
+2023-01-02,Laptop,South,Sarah Wilson,9,299,Bank Transfer,5,2691
+2023-01-02,Laptop,South,John Smith,2,599,Credit Card,1,1198
+2023-01-03,Tablet,West,Sarah Wilson,6,899,PayPal,5,5394
+2023-01-04,Tablet,West,Sarah Wilson,4,599,Cash,5,2396
+2023-01-05,Monitor,North,Michael Chen,5,149,PayPal,3,745
+2023-01-05,Laptop,East,John Smith,7,899,Bank Transfer,5,6293
+2023-01-08,Headphones,South,Sarah Wilson,5,449,Bank Transfer,1,2245
+2023-01-09,Headphones,South,John Smith,4,899,Cash,1,3596
+2023-01-09,Headphones,East,John Smith,6,299,PayPal,3,1794
+2023-01-12,Tablet,North,Emma Davis,2,149,Bank Transfer,2,298
+2023-01-13,Tablet,North,Michael Chen,9,899,Cash,1,8091
+2023-01-14,Tablet,West,Sarah Wilson,6,899,PayPal,4,5394
+2023-01-14,Headphones,South,Michael Chen,1,299,Bank Transfer,5,299
+2023-01-15,Tablet,West,John Smith,8,599,Bank Transfer,3,4792
+2023-01-15,Tablet,South,John Smith,7,299,Bank Transfer,5,2093
+2023-01-15,Laptop,South,Sarah Wilson,5,599,PayPal,4,2995
+2023-01-15,Monitor,West,Emma Davis,7,449,Bank Transfer,2,3143
+2023-01-15,Laptop,West,John Smith,2,899,Bank Transfer,4,1798
+2023-01-18,Laptop,East,Michael Chen,2,149,PayPal,4,298
+2023-01-21,Smartphone,South,Sarah Wilson,2,299,PayPal,5,598
+2023-01-21,Tablet,North,Michael Chen,1,899,Bank Transfer,5,899
+2023-01-21,Headphones,North,Michael Chen,1,899,Credit Card,5,899
+2023-01-22,Laptop,South,Sarah Wilson,6,899,Bank Transfer,2,5394
+2023-01-24,Monitor,South,John Smith,6,149,Bank Transfer,4,894
+2023-01-27,Monitor,East,Sarah Wilson,8,449,Bank Transfer,2,3592
+2023-01-27,Smartphone,East,Sarah Wilson,5,599,Credit Card,4,2995
+2023-01-28,Monitor,North,Sarah Wilson,8,449,PayPal,1,3592
+2023-01-28,Headphones,West,Sarah Wilson,1,299,Bank Transfer,3,299
+2023-01-28,Smartphone,North,Michael Chen,3,449,Cash,4,1347
+2023-01-28,Monitor,North,Michael Chen,1,449,Bank Transfer,2,449
+2023-01-29,Laptop,North,Emma Davis,7,599,PayPal,4,4193
+2023-01-30,Headphones,East,Sarah Wilson,6,149,PayPal,2,894
+2023-02-02,Laptop,East,Michael Chen,9,599,Bank Transfer,2,5391
+2023-02-02,Headphones,East,Michael Chen,2,149,PayPal,3,298
+2023-02-04,Smartphone,South,John Smith,3,899,PayPal,1,2697
+2023-02-04,Monitor,North,Emma Davis,8,899,Cash,5,7192
+2023-02-05,Laptop,South,Michael Chen,6,299,Credit Card,5,1794
+2023-02-06,Monitor,South,Sarah Wilson,8,149,Bank Transfer,4,1192
+2023-02-07,Smartphone,East,Michael Chen,1,149,Credit Card,2,149
+2023-02-09,Smartphone,East,Emma Davis,4,899,Credit Card,1,3596
+2023-02-10,Headphones,North,Michael Chen,9,899,Credit Card,5,8091
+2023-02-10,Headphones,North,John Smith,6,449,Bank Transfer,5,2694
+2023-02-11,Laptop,North,Sarah Wilson,7,149,Bank Transfer,4,1043
+2023-02-13,Tablet,North,Emma Davis,8,449,Cash,2,3592
+2023-02-13,Headphones,East,Emma Davis,9,299,Cash,2,2691
+2023-02-14,Headphones,West,Michael Chen,6,299,Cash,1,1794
+2023-02-14,Headphones,North,John Smith,4,149,PayPal,1,596
+2023-02-17,Headphones,North,Sarah Wilson,9,899,Credit Card,1,8091
+2023-02-17,Laptop,North,John Smith,4,299,Cash,3,1196
+2023-02-18,Headphones,East,John Smith,5,299,Cash,3,1495
+2023-02-19,Monitor,West,Emma Davis,2,449,PayPal,5,898
+2023-02-20,Smartphone,West,Emma Davis,3,299,Credit Card,3,897
+2023-02-20,Monitor,South,Michael Chen,3,899,PayPal,1,2697
+2023-02-20,Headphones,North,Emma Davis,3,149,PayPal,3,447
+2023-02-21,Smartphone,South,Sarah Wilson,9,149,Credit Card,3,1341
+2023-02-22,Tablet,East,Michael Chen,2,599,Credit Card,1,1198
+2023-02-22,Monitor,North,Sarah Wilson,5,149,Cash,4,745
+2023-02-22,Laptop,South,Emma Davis,2,149,Bank Transfer,3,298
+2023-02-23,Headphones,North,Sarah Wilson,9,299,PayPal,4,2691
+2023-02-23,Tablet,North,Emma Davis,3,299,Bank Transfer,3,897
+2023-02-24,Tablet,West,Michael Chen,5,449,Cash,4,2245
+2023-02-27,Tablet,South,John Smith,7,449,Bank Transfer,2,3143
+2023-02-28,Smartphone,South,Sarah Wilson,5,599,Bank Transfer,1,2995
+2023-02-28,Headphones,South,John Smith,4,449,Bank Transfer,3,1796
+2023-03-01,Laptop,South,Michael Chen,2,449,Credit Card,3,898
+2023-03-03,Monitor,West,John Smith,6,899,Credit Card,4,5394
+2023-03-03,Headphones,East,Michael Chen,7,149,Credit Card,5,1043
+2023-03-03,Smartphone,West,Michael Chen,6,299,PayPal,4,1794
+2023-03-04,Tablet,South,Michael Chen,3,149,Cash,2,447
+2023-03-04,Tablet,West,Emma Davis,3,599,PayPal,1,1797
+2023-03-05,Headphones,North,Emma Davis,9,299,Bank Transfer,1,2691
+2023-03-06,Tablet,West,Michael Chen,8,299,PayPal,4,2392
+2023-03-07,Laptop,North,Sarah Wilson,9,449,Cash,1,4041
+2023-03-12,Laptop,East,Michael Chen,8,449,Cash,2,3592
+2023-03-12,Smartphone,North,John Smith,4,299,Cash,5,1196
+2023-03-13,Headphones,East,Sarah Wilson,9,149,PayPal,3,1341
+2023-03-13,Headphones,South,Michael Chen,5,299,PayPal,2,1495
+2023-03-14,Headphones,South,Michael Chen,1,299,Bank Transfer,1,299
+2023-03-16,Smartphone,West,John Smith,2,449,Credit Card,1,898
+2023-03-16,Monitor,North,John Smith,5,599,Bank Transfer,4,2995
+2023-03-22,Laptop,West,Emma Davis,7,449,PayPal,1,3143
+2023-03-22,Tablet,West,Sarah Wilson,3,899,Cash,5,2697
+2023-03-23,Smartphone,South,Sarah Wilson,8,899,Cash,2,7192
+2023-03-25,Smartphone,North,John Smith,6,899,Cash,3,5394
+2023-03-25,Tablet,North,Sarah Wilson,5,599,Credit Card,4,2995
+2023-03-27,Tablet,West,Emma Davis,4,299,PayPal,1,1196
+2023-03-29,Tablet,North,John Smith,8,299,PayPal,5,2392
+2023-03-29,Laptop,North,Michael Chen,6,149,Credit Card,1,894
+2023-03-29,Laptop,West,Michael Chen,7,899,Credit Card,5,6293
+2023-03-30,Laptop,West,Emma Davis,4,449,Bank Transfer,3,1796
+2023-03-30,Monitor,North,Michael Chen,1,899,Bank Transfer,4,899
+2023-03-30,Smartphone,West,Emma Davis,7,599,Cash,3,4193
+2023-03-31,Laptop,North,Emma Davis,3,599,PayPal,1,1797
+2023-03-31,Smartphone,West,Michael Chen,3,299,PayPal,2,897
+2023-04-02,Laptop,North,Emma Davis,6,299,Credit Card,5,1794
+2023-04-02,Tablet,South,John Smith,5,299,Credit Card,2,1495
+2023-04-03,Laptop,West,Emma Davis,6,149,Bank Transfer,2,894
+2023-04-05,Tablet,South,Michael Chen,5,299,Bank Transfer,4,1495
+2023-04-06,Tablet,East,John Smith,7,449,Credit Card,5,3143
+2023-04-06,Smartphone,South,Michael Chen,3,149,Cash,2,447
+2023-04-09,Tablet,East,John Smith,1,149,Cash,5,149
+2023-04-10,Tablet,East,John Smith,1,149,Credit Card,5,149
+2023-04-11,Laptop,East,Sarah Wilson,3,149,Cash,2,447
+2023-04-13,Headphones,North,Sarah Wilson,7,599,Bank Transfer,5,4193
+2023-04-13,Tablet,South,Sarah Wilson,8,599,Credit Card,1,4792
+2023-04-13,Laptop,East,Sarah Wilson,4,599,Credit Card,2,2396
+2023-04-13,Monitor,East,John Smith,2,599,Cash,5,1198
+2023-04-14,Laptop,West,Michael Chen,6,449,Credit Card,3,2694
+2023-04-14,Laptop,North,John Smith,1,899,Bank Transfer,3,899
+2023-04-14,Monitor,West,Emma Davis,6,899,PayPal,3,5394
+2023-04-16,Tablet,East,Michael Chen,2,449,Cash,2,898
+2023-04-17,Smartphone,North,Michael Chen,3,149,PayPal,1,447
+2023-04-18,Headphones,North,Emma Davis,1,299,Cash,3,299
+2023-04-18,Laptop,West,Sarah Wilson,3,449,Cash,5,1347
+2023-04-21,Headphones,West,Emma Davis,9,149,Cash,1,1341
+2023-04-21,Smartphone,South,Michael Chen,5,899,PayPal,1,4495
+2023-04-26,Smartphone,North,Emma Davis,6,599,PayPal,2,3594
+2023-04-27,Laptop,East,Sarah Wilson,8,449,Cash,2,3592
+2023-04-28,Tablet,West,John Smith,8,299,PayPal,4,2392
+2023-05-01,Smartphone,West,Emma Davis,1,299,Credit Card,1,299
+2023-05-01,Headphones,West,Sarah Wilson,5,599,Credit Card,3,2995
+2023-05-02,Laptop,East,John Smith,2,899,Credit Card,2,1798
+2023-05-03,Laptop,West,John Smith,6,449,Credit Card,2,2694
+2023-05-04,Smartphone,South,John Smith,2,899,Bank Transfer,2,1798
+2023-05-04,Laptop,West,Michael Chen,3,149,Bank Transfer,1,447
+2023-05-08,Tablet,South,Sarah Wilson,8,599,PayPal,1,4792
+2023-05-09,Monitor,West,Sarah Wilson,9,149,PayPal,1,1341
+2023-05-09,Tablet,West,Emma Davis,9,149,Cash,2,1341
+2023-05-10,Monitor,East,Sarah Wilson,2,299,Bank Transfer,5,598
+2023-05-10,Smartphone,North,Sarah Wilson,1,899,Bank Transfer,5,899
+2023-05-11,Smartphone,East,Emma Davis,2,149,PayPal,3,298
+2023-05-11,Tablet,East,Michael Chen,1,299,PayPal,3,299
+2023-05-11,Tablet,South,Sarah Wilson,8,599,PayPal,1,4792
+2023-05-12,Laptop,East,Michael Chen,8,149,PayPal,4,1192
+2023-05-12,Tablet,South,John Smith,2,899,Cash,2,1798
+2023-05-12,Smartphone,North,Emma Davis,5,449,PayPal,5,2245
+2023-05-14,Headphones,North,Emma Davis,8,899,Bank Transfer,1,7192
+2023-05-14,Laptop,West,John Smith,2,149,Bank Transfer,3,298
+2023-05-15,Tablet,East,John Smith,4,899,PayPal,2,3596
+2023-05-15,Tablet,East,John Smith,5,449,Cash,4,2245
+2023-05-16,Monitor,West,Sarah Wilson,3,599,Cash,2,1797
+2023-05-16,Smartphone,West,Sarah Wilson,3,599,Cash,2,1797
+2023-05-17,Laptop,North,Emma Davis,3,599,PayPal,1,1797
+2023-05-17,Headphones,North,Sarah Wilson,9,899,PayPal,3,8091
+2023-05-19,Tablet,East,Emma Davis,2,449,Bank Transfer,2,898
+2023-05-22,Headphones,South,Michael Chen,8,149,Credit Card,1,1192
+2023-05-23,Smartphone,West,John Smith,9,299,PayPal,3,2691
+2023-05-26,Headphones,South,John Smith,1,899,Credit Card,3,899
+2023-05-30,Headphones,South,Michael Chen,1,899,PayPal,2,899
+2023-05-31,Headphones,North,John Smith,9,899,Bank Transfer,3,8091
+2023-05-31,Smartphone,East,Michael Chen,7,599,Cash,2,4193
+2023-06-01,Smartphone,South,Sarah Wilson,1,599,Cash,1,599
+2023-06-01,Monitor,North,John Smith,5,149,Credit Card,4,745
+2023-06-03,Laptop,West,Sarah Wilson,5,449,Credit Card,3,2245
+2023-06-04,Monitor,East,Sarah Wilson,7,899,PayPal,4,6293
+2023-06-06,Laptop,North,Emma Davis,7,149,Cash,1,1043
+2023-06-07,Tablet,South,Emma Davis,1,299,Cash,5,299
+2023-06-09,Monitor,East,John Smith,1,449,Bank Transfer,5,449
+2023-06-10,Tablet,North,Sarah Wilson,5,149,PayPal,4,745
+2023-06-11,Laptop,West,John Smith,1,449,PayPal,3,449
+2023-06-11,Laptop,East,Sarah Wilson,7,299,Credit Card,4,2093
+2023-06-12,Laptop,South,John Smith,5,449,Credit Card,1,2245
+2023-06-12,Monitor,West,Sarah Wilson,5,299,Cash,5,1495
+2023-06-13,Headphones,North,Michael Chen,6,449,Bank Transfer,1,2694
+2023-06-14,Headphones,North,Emma Davis,3,899,Credit Card,2,2697
+2023-06-16,Headphones,North,John Smith,8,449,PayPal,2,3592
+2023-06-19,Monitor,North,Michael Chen,2,599,Credit Card,2,1198
+2023-06-19,Tablet,West,John Smith,6,599,PayPal,3,3594
+2023-06-20,Laptop,South,John Smith,1,149,Credit Card,3,149
+2023-06-21,Headphones,North,John Smith,8,299,Bank Transfer,4,2392
+2023-06-21,Headphones,West,Emma Davis,4,599,Credit Card,2,2396
+2023-06-21,Headphones,North,John Smith,5,299,Bank Transfer,5,1495
+2023-06-24,Monitor,South,John Smith,4,899,PayPal,4,3596
+2023-06-24,Laptop,South,Emma Davis,2,149,Cash,1,298
+2023-06-24,Monitor,West,John Smith,5,449,Credit Card,5,2245
+2023-06-28,Smartphone,South,Sarah Wilson,6,149,Bank Transfer,3,894
+2023-06-29,Headphones,West,John Smith,3,149,Credit Card,5,447
+2023-07-04,Laptop,South,Sarah Wilson,2,299,Cash,5,598
+2023-07-06,Smartphone,West,Emma Davis,9,899,PayPal,4,8091
+2023-07-07,Headphones,North,Emma Davis,2,299,Bank Transfer,5,598
+2023-07-07,Smartphone,North,Michael Chen,1,449,Credit Card,2,449
+2023-07-07,Laptop,South,Michael Chen,3,449,Cash,5,1347
+2023-07-07,Smartphone,West,John Smith,3,449,Cash,2,1347
+2023-07-08,Headphones,West,John Smith,9,899,Cash,1,8091
+2023-07-09,Tablet,North,John Smith,5,599,Credit Card,5,2995
+2023-07-09,Tablet,North,Michael Chen,5,599,Credit Card,2,2995
+2023-07-09,Smartphone,East,Sarah Wilson,5,899,Cash,1,4495
+2023-07-09,Monitor,West,Sarah Wilson,1,899,Bank Transfer,5,899
+2023-07-09,Laptop,South,Emma Davis,6,899,Bank Transfer,4,5394
+2023-07-09,Headphones,West,John Smith,7,149,Credit Card,3,1043
+2023-07-09,Headphones,South,John Smith,3,299,Credit Card,3,897
+2023-07-09,Smartphone,West,Sarah Wilson,4,299,Bank Transfer,5,1196
+2023-07-10,Laptop,South,John Smith,6,599,Bank Transfer,4,3594
+2023-07-11,Headphones,North,John Smith,9,599,Credit Card,1,5391
+2023-07-12,Monitor,West,Emma Davis,1,449,Credit Card,3,449
+2023-07-17,Monitor,East,John Smith,4,899,PayPal,5,3596
+2023-07-18,Laptop,East,Emma Davis,7,899,Bank Transfer,2,6293
+2023-07-19,Laptop,North,John Smith,8,299,Cash,3,2392
+2023-07-19,Laptop,South,Sarah Wilson,1,449,Bank Transfer,1,449
