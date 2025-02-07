@@ -9,8 +9,12 @@ from collections import OrderedDict
 def load_tapas_model():
     """Load and cache the TAPAS tokenizer and model."""
     try:
-        tokenizer = TapasTokenizer.from_pretrained('google/tapas-base-finetuned-wtq')
-        model = TapasForQuestionAnswering.from_pretrained('google/tapas-base-finetuned-wtq')
+        tokenizer = TapasTokenizer.from_pretrained(
+            'google/tapas-base-finetuned-wtq'
+        )
+        model = TapasForQuestionAnswering.from_pretrained(
+            'google/tapas-base-finetuned-wtq'
+        )
         return tokenizer, model
     except Exception as e:
         st.error(f"Error loading TAPAS model: {e}")
