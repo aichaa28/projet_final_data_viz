@@ -205,7 +205,7 @@ def process_question(question, df, max_rows=50):
             )
 
             outputs = model(**inputs)
-            predicted_answer_coords, predicted_agg_indices = tokenizer.convert_logits_to_predictions(
+            predicted_answer_coords = tokenizer.convert_logits_to_predictions(
                 inputs,
                 outputs.logits.detach(),
                 outputs.logits_aggregation.detach()
