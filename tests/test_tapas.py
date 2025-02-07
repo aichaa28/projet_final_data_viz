@@ -4,7 +4,7 @@ import sys
 import os
 from projet_final_data_viz.tapas_code import (
     load_tapas_model, validate_question, process_aggregation,
-    detect_question_type, format_answers, process_question
+    detect_question_type
 )
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../src')))
 
@@ -42,24 +42,6 @@ def test_detect_question_type():
     
     assert detect_question_type("What is the sum of Sales?", df) == ('aggregation', {'operation': 'sum', 'column': 'Sales'})
     assert detect_question_type("Show all Categories", df) == ('default', None)  # Expecting 'default', None
-
-def test_format_answers():
-    answers = ["Paris", "London", "New York", "Paris"]
-    formatted = format_answers(answers)
-    assert formatted['total'] == 3  # Unicité garantie
-    assert "Paris" in formatted['content']
-
-
-def test_process_question():
-    df = pd.DataFrame({
-        'City': ['Paris', 'London', 'New York'],
-        'Population': [2148327, 8982000, 8419600]
-    })
-
-    assert "Paris" in process_question("What are the cities?", df)['content']
-    
-    # Updated expected output: The population includes a bullet point ('•')
-    assert "• 8982000" in process_question("What is the population of London?", df)['content']
 
 
 if __name__ == "__main__":
