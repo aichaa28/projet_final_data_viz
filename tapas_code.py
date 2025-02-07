@@ -5,6 +5,7 @@ from transformers import TapasTokenizer, TapasForQuestionAnswering
 from collections import OrderedDict
 
 
+
 @st.cache_resource
 def load_tapas_model():
     """Load and cache the TAPAS tokenizer and model."""
@@ -139,28 +140,32 @@ def detect_question_type(question, df):
 
 
 def format_answers(answers, max_display=50):
-    """Format the answers for display."""
+    """Format the answers for display in a more human-like manner."""
     if not answers:
         return "No answers found."
 
     if isinstance(answers, (int, float, str)):
         return str(answers)
 
+    # Remove duplicates while maintaining order
     unique_answers = list(OrderedDict.fromkeys(answers))
+    total_answers = len(unique_answers)
 
-    if len(unique_answers) > max_display:
+    if total_answers > max_display:
         return {
             'type': 'paginated',
-            'answers': unique_answers,
-            'total': len(unique_answers)
+            'answers': unique_answers[:max_display],
+            'total': total_answers,
+            'message': f"Displaying {max_display} of {total_answers} answers."
         }
     else:
         formatted = "\n".join(f"• {answer}" for answer in unique_answers)
         return {
             'type': 'direct',
             'content': formatted,
-            'total': len(unique_answers)
+            'total': total_answers
         }
+
 
 
 def process_question(question, df, max_rows=50):

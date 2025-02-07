@@ -1,10 +1,11 @@
 import streamlit as st
 import pandas as pd
-import numpy as np
-import anthropic
 
+
+from description import describe_dataset
 from auth import auth_page
 from tapas_code import process_question
+from claude_code import ask_claude
 
 # Configuration de la page
 st.set_page_config(
@@ -52,70 +53,6 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
-
-
-def describe_dataset(df):
-    """Génère une description du dataset et affiche des métriques."""
-    st.subheader("Dataset Overview")
-    
-    st.write("**Basic Information:**")
-    col1, col2, col3, col4 = st.columns(4)
-    with col1:
-        st.metric("Rows", df.shape[0])
-    with col2:
-        st.metric("Columns", df.shape[1])
-    with col3:
-        st.metric("Missing Values", df.isna().sum().sum())
-    with col4:
-        st.metric("Duplicates", df.duplicated().sum())
-    
-    col5, col6, col7, col8 = st.columns(4)
-    with col5:
-        st.metric("Numeric Columns", df.select_dtypes(include=np.number).shape[1])
-    with col6:
-        st.metric("Categorical Cols", df.select_dtypes(include=['object', 'category']).shape[1])
-    with col7:
-        st.metric("Date Columns", df.select_dtypes(include=['datetime64']).shape[1])
-    with col8:
-        memory_usage = df.memory_usage(deep=True).sum() / 1024**2
-        st.metric("Memory (MB)", f"{memory_usage:.2f}")
-    
-    st.write("\n**Column Types:**")
-    col_types = pd.DataFrame({
-        'Column': df.columns,
-        'Type': df.dtypes,
-        'Missing Values': df.isna().sum(),
-        'Unique Values': df.nunique(),
-    })
-    st.dataframe(col_types, use_container_width=True)
-    
-    st.write("\n**Sample Data:**")
-    st.dataframe(df.head(), use_container_width=True)
-
-
-def ask_claude(question, df):
-    """Envoie une question à l'API Claude et retourne la réponse."""
-    client = anthropic.Client(st.session_state.claude_api_key)
-    context = f"""Here is information about the dataset:
-    - Shape: {df.shape}
-    - Columns: {', '.join(df.columns)}
-    - Sample data:\n{df.head().to_string()}
-    
-    Question: {question}
-    
-    Please provide a clear and concise answer based on the data provided."""
-    
-    try:
-        response = client.messages.create(
-            model="claude-3-opus-20240229",
-            max_tokens=1024,
-            temperature=0,
-            messages=[{"role": "user", "content": context}]
-        )
-        return response.content
-    except Exception as e:
-        st.error(f"Error querying Claude: {e}")
-        return "Error getting response from Claude"
 
 
 # Authentification
