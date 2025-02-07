@@ -131,7 +131,7 @@ def detect_question_type(question, df):
                     return 'aggregation', {'operation': operation, 'column': col}
 
     # Check for column listing
-    list_keywords = ['show', 'list', 'what are', 'display', 'give me', 'what is in']
+    list_keywords = ['show','show all' 'list', 'what are', 'display', 'give me', 'what is in']
     for col in df.columns:
         if col.lower() in question_lower and any(kw in question_lower for kw in list_keywords):
             return 'column', col

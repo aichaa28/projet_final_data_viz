@@ -4,7 +4,7 @@ import pandas as pd
 
 from description import describe_dataset
 from auth import auth_page
-from tapas_code import process_question
+from projet_final_data_viz.tapas_code import process_question
 from claude_code import ask_claude
 
 # Configuration de la page
