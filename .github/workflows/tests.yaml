@@ -18,11 +18,11 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.12.5'  # Version exacte de Python
+          python-version: '3.12.5'
 
       - name: Install Poetry
         run: |
-          curl -sSL https://install.python-poetry.org | python3 -
+          curl -sSL https://install.python-poetry.org | python3 - 
           echo "$HOME/.local/bin" >> $GITHUB_PATH
           export PATH="$HOME/.local/bin:$PATH"
       
@@ -33,3 +33,7 @@ jobs:
       - name: Install dependencies
         run: |
           poetry install
+
+      - name: Run tests
+        run: |
+          poetry run pytest . --config=projet_final_data_viz/pytest.ini --maxfail=1 --disable-warnings -q
