@@ -36,4 +36,4 @@ jobs:
 
       - name: Run tests
         run: |
-          poetry run pytest --config=C:/Users/Aycha/Desktop/M2_BDIA/visualization/projet_final_data_viz/pytest.ini --maxfail=1 --disable-warnings -q
+          poetry run pytest --maxfail=1 --disable-warnings -q
