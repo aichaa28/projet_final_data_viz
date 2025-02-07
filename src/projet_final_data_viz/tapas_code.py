@@ -167,7 +167,6 @@ def format_answers(answers, max_display=50):
         }
 
 
-
 def process_question(question, df, max_rows=50):
     """Process the question and return the answer."""
     if not validate_question(question):
