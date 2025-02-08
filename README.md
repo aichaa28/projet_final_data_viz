@@ -55,12 +55,35 @@ streamlit run src/projet_final_data_viz/app.py
 
 ### 📂 Project Structure
 
-```bash
-├── .github/workflows/      # CI/CD workflows  
-├── docs/                   # Sphinx documentation  
-├── src/projet_final_data_viz/  # Main application code  
-├── tests/                  # Unit tests  
-├── pyproject.toml          # Project dependencies  
-└── README.md               # Project overview  
- ```
+## 📂 Project Structure
+
+- **.github/**                  # GitHub Actions workflows
+  - **workflows/**               # CI/CD workflows
+- **docs/**                      # Sphinx documentation
+- **src/**                       # Main source code
+  - **projet_final_data_viz/**   # Application logic
+    - **__init__.py**            # Initialization file
+    - **agents.py**              # Claude integration
+    - **api.py**                 # API related logic
+    - **app.py**                 # Main app file
+    - **auth.py**                # Authentication logic
+    - **description.py**         # Description handling
+    - **tapas_code.py**          # TAPAS model related code
+- **tests/**                     # Unit tests
+  - **__pycache__**              # Cached bytecode
+  - **__init__.py**              # Initialization file
+  - **test_api.py**              # API tests
+  - **test_app.py**              # App tests
+  - **test_auth.py**             # Authentication tests
+  - **test_description.py**      # Description tests
+  - **test_tapas.py**            # TAPAS model tests
+- **.coverage**                  # Code coverage report
+- **.gitignore**                 # Git ignore file
+- **.pre-commit-config.yaml**    # Pre-commit configuration
+- **pyproject.toml**             # Project dependencies
+- **poetry.lock**                # Poetry lock file
+- **pytest.ini**                 # Pytest configuration
+- **README.md**                  # Project overview
+- **utils.py**                   # Utility functions
+
 
