@@ -26,7 +26,7 @@ def test_auth_page(mock_rerun, mock_button, mock_text_input, mock_tapas_tokenize
     auth_page()
 
     # Check if the correct functions were called
-    mock_text_input.assert_called_once_with("Enter your Claude API key:", type="password")
+    mock_text_input.assert_called_once_with("Entrez votre clé API Claude :", type="password")
     mock_button.assert_called_once_with("Submit")
     mock_tapas_tokenizer.assert_called_once_with('google/tapas-base-finetuned-wtq')
     mock_tapas_model.assert_called_once_with('google/tapas-base-finetuned-wtq')
