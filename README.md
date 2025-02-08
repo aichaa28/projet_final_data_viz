@@ -31,18 +31,20 @@ It includes:
 1️⃣ **Clone the repository**  
 ```bash
 git clone https://github.com/aichaa28/projet_final_data_viz.git
-cd projet_final_data_viz ```
+cd projet_final_data_viz
+```
 
 2️⃣ **Install dependencies (Using Poetry)**
 
 ```bash
 poetry install
+```
 
 3️⃣ **Run the application**
 
 ```bash
 streamlit run src/projet_final_data_viz/app.py 
-
+ ```
 ### ✅ Best Practices Followed
 
 -Robust prompt engineering to handle various data inputs.
@@ -60,5 +62,5 @@ streamlit run src/projet_final_data_viz/app.py
 ├── tests/                  # Unit tests  
 ├── pyproject.toml          # Project dependencies  
 └── README.md               # Project overview  
-
+ ```
 
