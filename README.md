@@ -39,13 +39,14 @@ cd projet_final_data_viz
 2️⃣ **Install dependencies (Using Poetry)**
 
 ```bash
+poetry shell
 poetry install
 ```
 
 3️⃣ **Run the application**
 
 ```bash
-streamlit run src/projet_final_data_viz/app.py 
+streamlit run app.py 
  ```
 ### ✅ Best Practices Followed
 
@@ -66,7 +67,6 @@ streamlit run src/projet_final_data_viz/app.py
     - **__init__.py**            # Initialization file
     - **agents.py**              # Claude integration
     - **api.py**                 # API related logic
-    - **app.py**                 # Main app file
     - **auth.py**                # Authentication logic
     - **description.py**         # Description handling
     - **tapas_code.py**          # TAPAS model related code
@@ -78,6 +78,7 @@ streamlit run src/projet_final_data_viz/app.py
   - **test_auth.py**             # Authentication tests
   - **test_description.py**      # Description tests
   - **test_tapas.py**            # TAPAS model tests
+- **app.py**                     # Main app file
 - **.coverage**                  # Code coverage report
 - **.gitignore**                 # Git ignore file
 - **.pre-commit-config.yaml**    # Pre-commit configuration
