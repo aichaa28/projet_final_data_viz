@@ -28,17 +28,17 @@ def test_describe_dataset(mock_dataframe, mock_metric, mock_write, mock_subheade
     describe_dataset(sample_dataframe)
 
     # Vérifier les appels des composants Streamlit
-    mock_subheader.assert_called_with("Dataset Overview")
+    mock_subheader.assert_called_with("Aperçu du Jeu de Données")
 
-    mock_write.assert_any_call("**Basic Information:**")
-    mock_metric.assert_any_call("Rows", 4)
-    mock_metric.assert_any_call("Columns", 3)
-    mock_metric.assert_any_call("Missing Values", 1)
-    mock_metric.assert_any_call("Duplicates", 0)
-    mock_metric.assert_any_call("Numeric Columns", 1)
-    mock_metric.assert_any_call("Categorical Cols", 1)
-    mock_metric.assert_any_call("Date Columns", 1)
-    mock_metric.assert_any_call("Memory (MB)", "0.00")
+    mock_write.assert_any_call("**Informations de base :**")
+    mock_metric.assert_any_call("Lignes", 4)
+    mock_metric.assert_any_call("Colonnes", 3)
+    mock_metric.assert_any_call("Valeurs Manquantes", 1)
+    mock_metric.assert_any_call("Doublons", 0)
+    mock_metric.assert_any_call("Colonnes Numériques", 1)
+    mock_metric.assert_any_call("Colonnes Catégorielles", 1)
+    mock_metric.assert_any_call("Colonnes de Date", 1)
+    mock_metric.assert_any_call("Mémoire (MB)", "0.00")
 
     mock_dataframe.assert_called()
 
