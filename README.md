@@ -56,7 +56,6 @@ streamlit run src/projet_final_data_viz/app.py
 ### 📂 Project Structure
 
 
-```bash
 - **.github/**                  # GitHub Actions workflows
   - **workflows/**               # CI/CD workflows
 - **docs/**                      # Sphinx documentation
@@ -85,5 +84,5 @@ streamlit run src/projet_final_data_viz/app.py
 - **pytest.ini**                 # Pytest configuration
 - **README.md**                  # Project overview
 - **utils.py**                   # Utility functions
- ```
+
 
