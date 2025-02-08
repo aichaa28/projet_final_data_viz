@@ -1,45 +1,64 @@
-# Data Visualization Application with Streamlit
+# 📊 Final Data Viz Project
 
-## Overview
+## 🚀 Project Overview
 
-This project utilizes **Streamlit** and **Pandas** to build an interactive web application that facilitates data exploration, analysis, and visualization. The app is designed to allow users to easily upload datasets, perform statistical analysis, create visualizations, and even ask questions about the data for immediate responses.
+This project aims to develop an application that:  
+- Accepts **any tabular dataset** as input.  
+- **Answers questions** about the dataset.  
+- Generates **multiple visualizations and interpretations** to provide meaningful insights.  
 
-By using this application, users can quickly gain insights from their data, making it an ideal tool for data analysis, data science projects, and exploratory data visualization.
+The goal is to build a robust and efficient interface that ensures relevant results while handling various data input challenges.  
 
-## Key Features
+## 🛠️ Technologies Used
 
-- **Data Import**: Upload CSV files directly into the application for analysis.
-- **Statistical Analysis**: View descriptive statistics such as mean, median, standard deviation, and detect missing values within datasets.
-- **Interactive Visualizations**: Generate a variety of visualizations including:
-  - Histograms
-  - Boxplots ...
-- **Dynamic Column Selection**: Choose columns from the dataset (both numerical and categorical) for targeted analysis and visualization.
-- **Customizable Plots**: Modify the appearance and styling of generated plots, such as color palettes and labels.
-- **Question Answering**: Ask questions related to the dataset, and receive automatic answers powered by the Claude API. This allows users to easily query their data for insights, such as identifying trends, calculating specific metrics, or getting a deeper understanding of patterns within the dataset.
+### 📌 **AI Models**
+- **TAPAS**: A model by Google designed for answering questions on tables.  
+- **Claude**: An advanced natural language processing model used for question understanding.  
 
-## Project Structure
+### 📌 **Deployment Framework**
+The application is developed and deployed using **Streamlit**, providing an interactive and user-friendly interface.  
 
-The project is structured to keep the code organized and modular:
+## 📖 Documentation
 
-projet_final/ 
-├── app.py # Main application script that runs the Streamlit app 
+The full documentation is available [here](https://aichaa28.github.io/projet_final_data_viz/).  
+It includes:  
+- **Project setup and installation guide**  
+- **Usage instructions**  
+- **Technical details on TAPAS and Claude integration**  
 
-├── auth.py # User authentication logic (if applicable) 
+## 🔧 Installation & Usage
 
-├── api.py # API interactions for external data or services 
+1️⃣ **Clone the repository**  
+```bash
+git clone https://github.com/aichaa28/projet_final_data_viz.git
+cd projet_final_data_viz ```
 
-├── utils.py # Utility functions for data processing and analysis
+2️⃣ **Install dependencies (Using Poetry)**
 
-├── tests/ # Unit tests and test cases to ensure code quality 
+```bash
+poetry install```
 
-├── .github/ # GitHub Actions workflows for CI/CD integration 
+3️⃣ **Run the application**
 
-├── .gitignore # Git ignore file to exclude unnecessary files from version control 
+```bash
+streamlit run src/projet_final_data_viz/app.py ```
 
-├── .pre-commit-config.yaml # Configuration for pre-commit hooks to enforce code quality
+### ✅ Best Practices Followed
 
-├── poetry.lock # Poetry lock file to manage dependencies 
+-Robust prompt engineering to handle various data inputs.
 
-├── pyproject.toml # Poetry configuration for the project 
+-Meaningful visualizations to enhance data understanding.
 
-└── README.md # Project documentation (this file)
+-Software development best practices, including testing and documentation.
+
+### 📂 Project Structure
+
+```bash
+├── .github/workflows/      # CI/CD workflows  
+├── docs/                   # Sphinx documentation  
+├── src/projet_final_data_viz/  # Main application code  
+├── tests/                  # Unit tests  
+├── pyproject.toml          # Project dependencies  
+└── README.md               # Project overview  
+
+```
