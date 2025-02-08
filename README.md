@@ -39,6 +39,7 @@ cd projet_final_data_viz
 2️⃣ **Install dependencies (Using Poetry)**
 
 ```bash
+poetry shell
 poetry install
 ```
 
