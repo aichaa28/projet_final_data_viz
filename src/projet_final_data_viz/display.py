@@ -1,10 +1,12 @@
 import streamlit as st
-from src.projet_final_data_viz.agents import suggest_graphs, generate_plotly_code
+from src.projet_final_data_viz.agents import suggest_graphs, generate_plotly_code, interpret_fig
 import re
+import plotly.express as px
+import plotly.graph_objects as go
 
 def setup_page_config():
     st.set_page_config(
-        page_title="Data Analysis Assistant",
+        page_title="Assistant Graphique Intelligent",
         layout="wide",
         initial_sidebar_state="collapsed"
     )
@@ -43,81 +45,104 @@ def setup_page_config():
     """, unsafe_allow_html=True)
 
 
-def display_suggestions (suggestions):
+def display_suggestions(suggestions):
     st.write("\n".join(suggestions))
     graph_list = re.findall(r'\d+\.\s(.*)', suggestions[0])
-    return (graph_list if graph_list else ["No suggestions extracted."])
+    return graph_list if graph_list else ["Aucune suggestion extraite."]
 
 
-def graph_display(client, df ) : 
-    st.subheader("Visualization")
-    selected_graph = st.selectbox("Choose a graph type:", st.session_state.graph_list)
-    if st.button("Generate Graph"):
-        with st.spinner("Generating..."):
-            plotly_code = generate_plotly_code(df, selected_graph, client).strip()
-            match = re.search(r"\[(.*?)\]", plotly_code, re.DOTALL)
-            x_code = match.group(1).strip() if match else ""
-            st.code(x_code, language="python")
+def graph_display(client, df):
+    st.subheader("Visualisation des Données")
+    graphique_selectionne = st.selectbox("Choisissez un type de graphique :", st.session_state.graph_list)
 
-            if x_code:
+    if st.button("Générer le Graphique"):
+        with st.spinner("Génération en cours..."):
+            code_plotly = generate_plotly_code(df, graphique_selectionne, client).strip()
+            code_plotly = code_plotly.strip('[]')
+
+            # 🔍 Trouver le **dernier** bloc de code entre crochets
+            correspondances = re.findall(r"\[(.*?)\]", code_plotly, re.DOTALL)
+            correspondances[-1].strip() if correspondances else ""
+
+            with st.expander("Cliquez pour voir le code"):
+                st.code(code_plotly, language="python")
+        
+            if code_plotly:
                 try:
-                    local_vars = {}
-                    exec(x_code, globals(), local_vars)
-                    fig = local_vars.get("fig")
+                    variables_locales = {"df": df, "go": go, "px": px}
+                    exec(code_plotly, globals(), variables_locales)
+                    fig = variables_locales.get("fig")
+
                     if fig:
                         st.plotly_chart(fig)
+                        interpretation = interpret_fig(fig, client)
+                        st.write(interpretation)
                     else:
-                        st.error("❌ Error: 'fig' was not generated.")
+                        st.error("❌ Erreur : 'fig' n'a pas été généré.")
+
+                except SyntaxError as e:
+                    st.error(f"❌ Erreur de syntaxe dans le code généré : {e}")
                 except Exception as e:
-                    st.error(f"Error executing the code: {e}")
+                    st.error(f"❌ Erreur lors de l'exécution du code : {e}")
             else:
-                st.error("❌ No valid code returned by Claude.")
+                st.error("❌ Aucun code valide retourné par Claude.")
 
 
 def user_graph_display(client, df):
-    st.subheader("Suggest a Graph:")
-    question = st.text_input("Graph Suggestion:")
-    if st.button("Generate Your Graph"):
-        with st.spinner("Generating..."):
-            plotly_code = generate_plotly_code(df, question, client).strip()
-            match = re.search(r"\[(.*?)\]", plotly_code, re.DOTALL)
-            x_code2 = match.group(1).strip() if match else ""
-            st.code(x_code2, language="python")
+    st.subheader("Suggérer un Graphique :")
+    question = st.text_input("Suggestion de Graphique :")
 
-            if x_code2:
+    if st.button("Générer le Graphique Suggéré"):
+        with st.spinner("Génération du Graphique Suggéré en cours..."):
+            code_plotly2 = generate_plotly_code(df, question, client).strip()
+            code_plotly2 = code_plotly2.strip('[]')
+
+            # 🔍 Trouver le **dernier** bloc de code entre crochets
+            correspondances2 = re.findall(r"\[(.*?)\]", code_plotly2, re.DOTALL)
+            correspondances2[-1].strip() if correspondances2 else ""
+
+            with st.expander("Cliquez pour voir le code"):
+                st.code(code_plotly2, language="python")
+        
+            if code_plotly2:
                 try:
-                    local_vars = {}
-                    exec(x_code2, globals(), local_vars)
-                    fig = local_vars.get("fig")
+                    variables_locales = {"df": df, "go": go, "px": px}
+                    exec(code_plotly2, globals(), variables_locales)
+                    fig = variables_locales.get("fig")
+
                     if fig:
                         st.plotly_chart(fig)
+                        interpretation = interpret_fig(fig, client)
+                        st.write(interpretation)
                     else:
-                        st.error("❌ Error: 'fig' was not generated.")
+                        st.error("❌ Erreur : 'fig' n'a pas été généré.")
+
+                except SyntaxError as e:
+                    st.error(f"❌ Erreur de syntaxe dans le code généré : {e}")
                 except Exception as e:
-                    st.error(f"Error executing the code: {e}")
+                    st.error(f"❌ Erreur lors de l'exécution du code : {e}")
             else:
-                st.error("❌ No valid code returned by Claude.")
+                st.error("❌ Aucun code valide retourné par Claude.")
 
 
 def display_graph_suggestions(df, client):
     """
-    Display suggested graphs based on the dataset and allow users to generate visualizations.
+    Affiche les graphiques suggérés en fonction du jeu de données et permet aux utilisateurs de générer des visualisations.
     """
     if "graph_list" not in st.session_state:
-        st.subheader("📌 Suggested Graphs")
+        st.subheader("📌 Graphiques Suggérés")
         suggestions = suggest_graphs(df, client)
         if suggestions:
             st.session_state.graph_list = display_suggestions(suggestions)
         else:
-            st.session_state.graph_list = ["No suggestions received."]
+            st.session_state.graph_list = ["Aucune suggestion reçue."]
     else:
-        st.subheader("📌 Suggested Graphs")
+        st.subheader("📌 Graphiques Suggérés")
         st.write("\n".join(st.session_state.graph_list))
 
-    # Graph selection
+    # Sélection du graphique
     if "graph_list" in st.session_state:
-        graph_display(client , df)
+        graph_display(client, df)
 
-
-    # User-defined graph suggestion
-    user_graph_display(client , df)
+    # Suggestion de graphique par l'utilisateur
+    user_graph_display(client, df)

@@ -1,21 +1,20 @@
 import pandas as pd
 import streamlit as st
-import re
 import anthropic
-
-# Chemin vers le CSV (uniquement utilisé par load_data() si besoin)
-CSV_PATH = "dataset.csv"
+import numpy as np
 
 
-def load_data():
-    """Charge le fichier CSV et retourne un DataFrame."""
-    try:
-        df = pd.read_csv(CSV_PATH, dtype=str)
-        return df
-    except Exception as e:
-        st.error(f"Erreur lors du chargement du CSV : {e}")
-        return None
+def limit_fig_json_length(fig, max_length=5000):
+    # Convertir la figure en JSON
+    fig_json = fig.to_json()
 
+    # Vérifier la longueur du JSON
+    if len(fig_json) > max_length:
+        # Si la longueur dépasse la limite, couper la chaîne et ajouter un message
+        truncated_json = fig_json[:max_length] + "... (truncated)"
+        return truncated_json
+    else:
+        return fig_json
 
 def initialize_claude_client():
     """Initialize the Claude API client using the user's provided API key."""
@@ -64,12 +63,12 @@ def suggest_graphs(df, client):
     {df.head(5).to_string()}
     Voici un résumé des colonnes : {summary_df.to_string()}
 
-    Propose 5 types de graphiques intéressants à générer en utilisant Plotly en fonction des colonnes disponibles.
+    Propose 5 types de graphiques intéressants à générer en utilisant Plotly en fonction des colonnes disponibles dans {df}.
     Les propositions doivent être sous forme de liste numérotée et ne pas utiliser de pie charts.
     Elles doivent être compréhensibles pour des personnes non expertes.
     """
     response = client.messages.create(
-        model="claude-2.1",
+        model="claude-3-5-sonnet-20241022",
         max_tokens=500,
         messages=[{"role": "user", "content": prompt}]
     )
@@ -91,8 +90,9 @@ def generate_plotly_code(df, chart_type, client):
     {df.head(5).to_string()}
     Voici un résumé des colonnes : {summary_df.to_string()}
     Tu devras respecter les bonnes pratiques de la data vizualisation :
-    Évitez toute redondance dans la visualisation des bar charts 
-    Soit affichez l'axe des y avec des repères indiquant la position des barres, soit optez pour un étiquetage direct en supprimant l'axe des y.
+    Évitez toute redondance dans la visualisation des bar charts :
+    -Soit affichez l'axe des y avec des repères indiquant la position des barres 
+    -soit optez pour un étiquetage direct en supprimant l'axe des y.
     Par ailleurs, il peut être judicieux de distinguer la barre la plus élevée en lui attribuant une couleur différente,
     Ordonner les barres de manière décroissante lorsque l'ordre de l'axe des x n'est pas indispensable.
     Supprimez également les cadres ou bordures inutiles qui nuisent à l'esthétique. 
@@ -101,53 +101,137 @@ def generate_plotly_code(df, chart_type, client):
     Tu dois me donner un code Python représentant un graphique avec Plotly correspondant à "{chart_type}" sans aucune explication.
     Retourne uniquement le code Python de la figure, sans texte supplémentaire sachant que ta dataframe s'appelle df.
     Ne donne que du code brut, prêt à l'utilisation, sans explication !!!
-    Entoure le code de crochets.
+    Entoure le code de crochets !
+    N'oublies pas d'eviter ces erreur :
+    -❌ Error executing the code: 'Figure' object has no attribute 'update_xaxis' 
+    -❌ Error executing the code: 'Figure' object has no attribute 'update_yaxis
+    Exemple : [ sales_by_category = df.groupby('x')['y'].sum().reset_index()
+
+    fig = px.bar(sales_by_category, x='x', y='y', 
+             title="Somme des Valeurs par Catégorie")]
     """
     response = client.messages.create(
-        model="claude-2.1",
+        model="claude-3-5-sonnet-20241022",
         max_tokens=500,
         messages=[{"role": "user", "content": prompt}]
     )
     if response and isinstance(response.content, list):
         raw_code = response.content[0].text
+        print(raw_code)
     else:
         raw_code = ""
-    # Nettoyage du code (suppression éventuelle de balises Markdown)
-    code_cleaned = re.sub(r"```python|```", "", raw_code).strip()
-    return code_cleaned
+    # Encadrer le code retourné avec des crochets
+    final_code = f"[{raw_code}]"
+    
+    return final_code
 
 
 def interpret_fig(fig, client):
     """
-    Envoie le JSON de la figure Plotly à Claude pour obtenir une interprétation du graphique.
+    Améliore l'interprétation du graphique en extrayant des statistiques clés avant de les envoyer à Claude.
+    Si le graphique n'a pas d'axes X et Y (ex: Sankey), il envoie uniquement le JSON.
     """
     try:
-        # Convertir la figure en JSON pour la transmettre à l'agent
-        fig_json = fig.to_json()
+        # Convertir la figure en JSON
+        fig_json = limit_fig_json_length(fig, max_length=10000)
+
+        # Récupérer le titre du graphique et le type de graphique
+        fig_title = fig.layout.title.text if fig.layout.title else 'Aucun titre'
+        fig_type = fig.__class__.__name__
+
+        # Vérifier si le graphique a des données X et Y
+        data = fig.data[0]  # On prend la première série de données
+        has_axes = hasattr(data, "x") and hasattr(data, "y")
+
+        if has_axes:
+            # Extraction des données numériques (si disponibles)
+            np.array(pd.to_numeric(data.x, errors='coerce'))
+            y_values = np.array(pd.to_numeric(data.y, errors='coerce'))
+
+            # Filtrer les valeurs manquantes (NaN) dans y_values
+            y_values_clean = y_values[~np.isnan(y_values)]  # Retirer les NaN
+
+            # Vérifier si des valeurs sont présentes après nettoyage
+            if y_values_clean.size > 0:
+                # Calcul des statistiques principales
+                min_y = np.nanmin(y_values_clean)
+                max_y = np.nanmax(y_values_clean)
+                mean_y = np.nanmean(y_values_clean)
+                median_y = np.nanmedian(y_values_clean)
+                std_y = np.nanstd(y_values_clean)
+
+                prompt = f"""
+                Tu es un expert en visualisation de données. Voici une analyse d'un graphique.
+
+                **Titre du graphique :** {fig_title}
+                **Type de graphique :** {fig_type}
+
+                **Statistiques clés :**
+                - Valeur minimale : {min_y:.2f}
+                - Valeur maximale : {max_y:.2f}
+                - Moyenne : {mean_y:.2f}
+                - Médiane : {median_y:.2f}
+                - Écart-type : {std_y:.2f}
+
+                **Axes :**
+                - Axe X : {data.xaxis if hasattr(data, 'xaxis') else 'Inconnu'}
+                - Axe Y : {data.yaxis if hasattr(data, 'yaxis') else 'Inconnu'}
+
+                **Analyse demandée :**
+                1️⃣ **Décris les tendances générales s'il y en a besoin.**  
+                2️⃣ **Lorsque tu parles de valeurs, précise à quel attribut elles appartiennent.**  
+                3️⃣ **Fournis une conclusion synthétique en 3 à 5 phrases pour un décideur.**  
+
+                Tout cela en 10 lignes maximum 
+                JSON du graphique :
+                {fig_json}
+                """
+            else:
+                prompt = f"""
+                Tu es un expert en visualisation de données. Voici une analyse d'un graphique.
+
+                **Titre du graphique :** {fig_title}
+                **Type de graphique :** {fig_type}
+
+                Les valeurs Y sont absentes ou non numériques. Veuillez vérifier les données et ajuster l'analyse en conséquence.
+
+                Tout cela en 10 lignes maximum
+                JSON du graphique :
+                {fig_json}
+                """
+        else:
+            # Cas où le graphique n'a pas d'axes (ex: Sankey)
+            prompt = f"""
+            Tu es un expert en visualisation de données. Voici un graphique complexe sans axes classiques.
+
+            **Titre du graphique :** {fig_title}
+            **Type de graphique :** {fig_type}
+
+            - Ce graphique ne contient pas de valeurs X et Y classiques.  
+            - Analyse directement la structure JSON pour en déduire une interprétation pertinente.  
+            - Décris les relations clés, la signification des nœuds et liens, et l'idée principale du graphique. 
+
+            Tout cela en 10 lignes maximum
+
+            JSON du graphique :
+            {fig_json}
+            """
+
+        response = client.messages.create(
+            model="claude-3-5-sonnet-20241022",
+            max_tokens=500,
+            messages=[{"role": "user", "content": prompt}]
+        )
+
+        interpretation = response.content[0].text if response and isinstance(response.content, list) else "Erreur d'interprétation."
+
     except Exception as e:
-        st.error(f"Erreur lors de la conversion de la figure en JSON : {e}")
-        return "Erreur lors de la conversion de la figure en JSON."
-
-    prompt = f"""
-    Tu es un expert en visualisation de données. Voici la représentation JSON d'un graphique généré avec Plotly :
-    {fig_json}
-    
-    Fournis une interprétation détaillée de ce que ce graphique représente, en décrivant les axes, les tendances principales, 
-    et toute information pertinente pour un utilisateur non expert.
-    """
-
-    response = client.messages.create(
-        model="claude-2.1",
-        max_tokens=300,
-        messages=[{"role": "user", "content": prompt}]
-    )
-
-    if response and isinstance(response.content, list):
-        interpretation = response.content[0].text
-    else:
-        interpretation = "Erreur : impossible d'obtenir une interprétation."
+        interpretation = f"Erreur lors du traitement : {e}"
 
     return interpretation
+
+
+
 
 
 def display_fig_interpretation(fig, client):
