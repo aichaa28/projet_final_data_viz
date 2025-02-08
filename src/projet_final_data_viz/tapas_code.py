@@ -57,7 +57,11 @@ def validate_question(question):
 def process_aggregation(df, operation, column, group_by=None):
     """Handle both simple and grouped aggregation operations."""
     try:
+        # Convertir la colonne en numérique, en forçant la conversion des valeurs non numériques en NaN
+        df[column] = pd.to_numeric(df[column], errors='coerce')
+
         if group_by:
+            # Appliquer l'opération d'agrégation
             if operation == 'sum':
                 result = df.groupby(group_by)[column].sum()
             elif operation in ['mean', 'average']:
@@ -69,16 +73,27 @@ def process_aggregation(df, operation, column, group_by=None):
             elif operation == 'max':
                 result = df.groupby(group_by)[column].max()
 
-            # Format grouped results
+            # Formatage des résultats d'agrégation groupée
             formatted_results = []
             for group, value in result.items():
-                if 'price' in column.lower() or 'amount' in column.lower():
-                    formatted_value = f"${value:,.2f}"
-                else:
-                    formatted_value = f"{value:.2f}"
+                try:
+                    if isinstance(value, (int, float)):
+                        if 'price' in column.lower() or 'amount' in column.lower():
+                            formatted_value = f"${value:,.2f}"  # Format monétaire
+                        else:
+                            formatted_value = f"{value:,.2f}"  # Format standard
+                    else:
+                        formatted_value = str(value)
+
+                except Exception as e:
+                    formatted_value = f"Error formatting {value}: {e}"
+
                 formatted_results.append(f"{group}: {formatted_value}")
+
             return "\n".join(formatted_results)
+
         else:
+            # Agrégation sans group_by
             if operation == 'sum':
                 result = df[column].sum()
                 return f"${result:,.2f}" if 'amount' in column.lower() or 'price' in column.lower() else f"{result:,.0f}"
@@ -91,8 +106,11 @@ def process_aggregation(df, operation, column, group_by=None):
                 return str(df[column].min())
             elif operation == 'max':
                 return str(df[column].max())
+
     except Exception as e:
         return f"Error in aggregation: {str(e)}"
+
+
 
 
 def detect_question_type(question, df):

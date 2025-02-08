@@ -1,9 +1,11 @@
 import pandas as pd
 import streamlit as st
 import re
+import anthropic
 
 # Chemin vers le CSV (uniquement utilisé par load_data() si besoin)
 CSV_PATH = "dataset.csv"
+
 
 def load_data():
     """Charge le fichier CSV et retourne un DataFrame."""
@@ -14,6 +16,23 @@ def load_data():
         st.error(f"Erreur lors du chargement du CSV : {e}")
         return None
 
+
+def initialize_claude_client():
+    """Initialize the Claude API client using the user's provided API key."""
+    if 'claude_client' not in st.session_state:
+        api_key = st.session_state.get('claude_api_key')  # Récupère la clé API saisie par l'utilisateur
+
+        if api_key:
+            try:
+                st.session_state.claude_client = anthropic.Anthropic(api_key=api_key)
+            except Exception as e:
+                st.error(f"Error initializing Claude client: {e}")
+                return None
+        else:
+            st.error("Claude API key not found. Please enter your API key in the authentication page.")
+            return None
+
+    return st.session_state.claude_client
 
 
 def df_summary(df):
@@ -60,6 +79,7 @@ def suggest_graphs(df, client):
         suggestions = ["Erreur : pas de suggestions reçues."]
     return suggestions
 
+
 def generate_plotly_code(df, chart_type, client):
     """
     Génère du code Python utilisant Plotly pour créer un graphique correspondant au type sélectionné.
@@ -95,3 +115,43 @@ def generate_plotly_code(df, chart_type, client):
     # Nettoyage du code (suppression éventuelle de balises Markdown)
     code_cleaned = re.sub(r"```python|```", "", raw_code).strip()
     return code_cleaned
+
+
+def interpret_fig(fig, client):
+    """
+    Envoie le JSON de la figure Plotly à Claude pour obtenir une interprétation du graphique.
+    """
+    try:
+        # Convertir la figure en JSON pour la transmettre à l'agent
+        fig_json = fig.to_json()
+    except Exception as e:
+        st.error(f"Erreur lors de la conversion de la figure en JSON : {e}")
+        return "Erreur lors de la conversion de la figure en JSON."
+
+    prompt = f"""
+    Tu es un expert en visualisation de données. Voici la représentation JSON d'un graphique généré avec Plotly :
+    {fig_json}
+    
+    Fournis une interprétation détaillée de ce que ce graphique représente, en décrivant les axes, les tendances principales, 
+    et toute information pertinente pour un utilisateur non expert.
+    """
+
+    response = client.messages.create(
+        model="claude-2.1",
+        max_tokens=300,
+        messages=[{"role": "user", "content": prompt}]
+    )
+
+    if response and isinstance(response.content, list):
+        interpretation = response.content[0].text
+    else:
+        interpretation = "Erreur : impossible d'obtenir une interprétation."
+
+    return interpretation
+
+
+def display_fig_interpretation(fig, client):
+    """Affiche dans Streamlit l'interprétation du graphique."""
+    st.subheader("Interprétation du graphique")
+    interpretation = interpret_fig(fig, client)
+    st.write(interpretation)
