@@ -36,12 +36,12 @@ cd projet_final_data_viz ```
 2️⃣ **Install dependencies (Using Poetry)**
 
 ```bash
-poetry install```
+poetry install
 
 3️⃣ **Run the application**
 
 ```bash
-streamlit run src/projet_final_data_viz/app.py ```
+streamlit run src/projet_final_data_viz/app.py 
 
 ### ✅ Best Practices Followed
 
@@ -61,4 +61,4 @@ streamlit run src/projet_final_data_viz/app.py ```
 ├── pyproject.toml          # Project dependencies  
 └── README.md               # Project overview  
 
-```
+
