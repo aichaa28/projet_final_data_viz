@@ -12,8 +12,10 @@ The goal is to build a robust and efficient interface that ensures relevant resu
 ## 🛠️ Technologies Used
 
 ### 📌 **AI Models**
-- **TAPAS**: A model by Google designed for answering questions on tables.  
-- **Claude**: An advanced natural language processing model used for question understanding.  
+
+- **Claude**: An advanced natural language processing model used for question understanding.
+- **TAPAS**: A model by Google Bert designed for answering questions on tables.  
+
 
 ### 📌 **Deployment Framework**
 The application is developed and deployed using **Streamlit**, providing an interactive and user-friendly interface.  
