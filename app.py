@@ -57,6 +57,7 @@ def main():
                 """
                 **📝 Remarque sur TAPAS :**  
                 - TAPAS fonctionne **beaucoup plus rapidement** et est **plus performant** sur des petits jeux de données.  
+                - Vous devez poser des questions claire et écrire le nom exact des colonnes.
                 - Il accepte les **questions uniquement en anglais**.  
                 """
                 )
